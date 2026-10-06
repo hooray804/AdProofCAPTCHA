@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdProofCAPTCHA Example</title>
+    <style>
+        body { 
+            background: #0a0a0a; 
+            margin: 0; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding-top: 50px;
+        }
+        #premium-content {
+            display: none;
+            margin-top: 20px;
+            padding: 25px;
+            background: #18181b;
+            border-left: 5px solid #10b981;
+            border-radius: 8px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #f4f4f5;
+            text-align: center;
+            line-height: 1.6;
+            max-width: 500px;
+        }
+        #captcha-wrapper {
+            width: 100%;
+            max-width: 400px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <noscript>
+        <div style="color:red; text-align:center; font-weight:bold;">
+            JavaScript and Web Workers are strictly required.
+        </div>
+    </noscript>
+
+    <h2>🔒 보호된 프리미엄 콘텐츠</h2>
+    <p>아래 캡챠를 완료하여 봇이 아님을 증명하세요.</p>
+
+    <div id="captcha-wrapper"></div>
+    <div id="premium-content"></div>
+    
+    <script src="/client/index.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const captcha = new AdProofCaptchaClient({
+                endpoint: '/api/captcha',            // API 라우터 기본 경로
+                adBannerUrl: '/banner.jpg',          // 반드시 public/ 폴더에 이미지가 존재해야 함
+                targetContainerId: 'captcha-wrapper',
+                onVerified: (data) => {
+                    const contentBox = document.getElementById('premium-content');
+                    contentBox.innerText = data.protectedPayload;
+                    contentBox.style.display = 'block';
+                },
+                onError: (err) => {
+                    console.error("CAPTCHA Failed:", err);
+                }
+            });
+
+            captcha.mount();
+        });
+    </script>
+</body>
+</html>

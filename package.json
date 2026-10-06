@@ -2,10 +2,13 @@
   "name": "adproofcaptcha-workspace",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "start": "node examples/server.js"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^5.2.1"
   }
 }

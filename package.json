@@ -1,0 +1,14 @@
+{
+  "name": "adproof-captcha",
+  "version": "1.0.0",
+  "description": "Zero-Trust Proof-of-Ad CAPTCHA framework",
+  "main": "server.js",
+  "browser": "client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["captcha", "adblock", "pow", "security", "zero-trust"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {}
+}
